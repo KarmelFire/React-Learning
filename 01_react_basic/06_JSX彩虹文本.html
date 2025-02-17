@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>彩虹文本练习</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="./lib/react.js"></script>
+    <script src="./lib/react-dom.js"></script>
+    <script src="./lib/babel.js"></script>
+
+    <script type="text/babel">
+      const root = ReactDOM.createRoot(document.querySelector("#root"));
+      const colors = [
+        "red",
+        "orange",
+        "yellow",
+        "green",
+        "blue",
+        "indigo",
+        "violet",
+      ];
+      let clickCount = 0;
+      let colorIndex = 0;
+
+      const btnClick = () => {
+        clickCount++;
+        colorIndex = (colorIndex + 1) % colors.length;
+        rootRender();
+      };
+
+      const rootRender = () => {
+        const messageStyle = {
+          color: clickCount === 0 ? "black" : colors[colorIndex],
+        };
+
+        const achievementMessage =
+          clickCount > 10 ? "恭喜你触发隐藏成就：彩虹大师！" : "";
+
+        root.render(
+          <div>
+            <h1 style={messageStyle}>你已经点击了 {clickCount} 次</h1>
+            <button onClick={btnClick}>点击我改变颜色 🌈</button>
+            {achievementMessage && <p>{achievementMessage}</p>}
+          </div>
+        );
+      };
+
+      rootRender();
+    </script>
+  </body>
+</html>
